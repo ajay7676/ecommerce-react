@@ -7,7 +7,7 @@ import Order from './components/pages/order/Order';
 import Cart from './components/pages/cart/Cart';
 import Dashboard from './components/pages/admin/dashboard/Dashboard';
 import NoPage from './components/pages/nopage/NoPage';
-import MyState from './context/myState';
+import MyState from './context/MyState';
 function App() {
 
   return (

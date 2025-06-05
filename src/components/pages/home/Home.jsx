@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../../layout/Layout'
 import HeroSection from './herosec/HeroSection'
 import SearchFilter from '../../ui/filter/SearchFilter'
+import ProductCard from './product-card/ProductCard'
 
 const Home = () => {
  
@@ -9,6 +10,7 @@ const Home = () => {
     <Layout>
       <HeroSection />
       <SearchFilter />
+      <ProductCard />
     </Layout>
   )
 }
