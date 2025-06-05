@@ -1,15 +1,14 @@
 import React from 'react'
 import Layout from '../../layout/Layout'
-import { useContext } from "react";
-import MyContext from '../../../context/MyContext'
+import HeroSection from './herosec/HeroSection'
+import SearchFilter from '../../ui/filter/SearchFilter'
 
 const Home = () => {
-  const {state , employee} = useContext(MyContext);
-
-
+ 
   return (
     <Layout>
-      home
+      <HeroSection />
+      <SearchFilter />
     </Layout>
   )
 }
