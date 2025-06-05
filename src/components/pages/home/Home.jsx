@@ -3,6 +3,7 @@ import Layout from '../../layout/Layout'
 import HeroSection from './herosec/HeroSection'
 import SearchFilter from '../../ui/filter/SearchFilter'
 import ProductCard from './product-card/ProductCard'
+import Testimonial from './testimonial/Testimonial'
 
 const Home = () => {
  
@@ -11,6 +12,7 @@ const Home = () => {
       <HeroSection />
       <SearchFilter />
       <ProductCard />
+      <Testimonial />
     </Layout>
   )
 }
