@@ -4,11 +4,13 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { FaUser, FaCartPlus } from 'react-icons/fa';
 import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 const DashobardInfo = () => {
     const context = useContext(MyContext)
     const { mode } = context
-    let [isOpen, setIsOpen] = useState(false)
+    let [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     function closeModal() {
         setIsOpen(false)
@@ -17,6 +19,11 @@ const DashobardInfo = () => {
     function openModal() {
         setIsOpen(true)
     }
+
+     const add = () => {
+          navigate("/addproduct")
+        
+     }
   return (
     <>
      <div className="container mx-auto">
@@ -50,6 +57,7 @@ const DashobardInfo = () => {
                                 <div className=" flex justify-end">
                                     <button
                                         type="button"
+                                        onClick={add}
                                         className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} > <div className="flex gap-2 items-center">
                                             Add Product <FaCartPlus size={20} />
                                         </div></button>

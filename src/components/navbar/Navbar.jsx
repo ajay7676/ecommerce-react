@@ -14,7 +14,7 @@ const Navbar = () => {
   const [open , setOpen ] = useState(false);
   const navigate = useNavigate();
 
-   const userInfo = JSON.parse(localStorage.getItem("ecommerce-token")) || " ";
+   const userInfo = JSON.parse(localStorage.getItem("ecommerce-token")) ;
   
    const handleLogout = () =>{
     localStorage.removeItem("ecommerce-token");
@@ -158,14 +158,20 @@ const Navbar = () => {
                     <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
                       Admin
                     </Link>
-                  </div> : ""
+                  </div> :  <div className="flow-root">
+                    <Link to={'/login'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                      Login
+                    </Link>
+                  </div>
                   }
 
                  {
-                  userInfo ?  <a onClick={handleLogout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                    Logout
+                  userInfo &&(
+                      <a onClick={handleLogout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                    Logout 
                   </a>
-                  : ""
+                  )
+                 
                  }
                 </div>
 
