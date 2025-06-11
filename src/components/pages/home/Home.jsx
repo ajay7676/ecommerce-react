@@ -11,7 +11,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const cardItem = useSelector((store) => store.cart);
-  console.log(cardItem)
    const addCart = () => {
         dispatch(addToCart("Shirt"))
    }

@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 import MyContext from '../../context/MyContext'
 import { toast } from 'react-toastify'
 import { createUserWithEmailAndPassword} from "firebase/auth";
-import {auth} from '../../firebase/FirebaseConfig'
+import {auth, fireDB} from '../../firebase/FirebaseConfig'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import Loader from '../ui/loader/Loader'
 
 
 const SignupForm = () => {
@@ -19,20 +21,37 @@ const SignupForm = () => {
          if(name === "" || email ==="" || password ==="")   {
             return toast.error("All fileds are requird");
          } 
+
+         setLoading(true)
         
         try {
             const users = await createUserWithEmailAndPassword(auth, email, password);
+             const  user = {
+                name: name ,
+                uid : users.user.uid,
+                email: users.user.email,
+                time : Timestamp.now()
+             }
+             const userRefrence  = collection(fireDB, "user");
+             await addDoc(userRefrence , user)
+            toast.success("Signup Success")
+             setName("")
+             setEmail("");
+             setPassword("");
+             setLoading(false)
 
-            console.log(users)
             
         } catch (error) {
-            console.log(error)
+            console.log("Signup Failed" , error)
             setLoading(false)
         }
 
      }
   return (
       <div className=' flex justify-center items-center h-screen'>
+            {
+                loading && (<Loader />)
+            }
             <div className=' bg-gray-800 px-10 py-10 rounded-xl '>
                 <div className="">
                     <h1 className='text-center text-white text-xl mb-4 font-bold'>Signup</h1>

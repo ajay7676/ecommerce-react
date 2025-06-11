@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import MyContext from '../../context/MyContext'
 import { FiSun } from 'react-icons/fi';
 import { BsFillCloudSunFill } from 'react-icons/bs';
@@ -11,8 +11,17 @@ import { RxCross2 } from 'react-icons/rx';
 const Navbar = () => {
   const context = useContext(MyContext);
   const {mode , toggleMode} = context;
-  const [open , setOpen ] = useState(false)
+  const [open , setOpen ] = useState(false);
+  const navigate = useNavigate();
 
+   const userInfo = JSON.parse(localStorage.getItem("ecommerce-token")) || " ";
+  
+   const handleLogout = () =>{
+    localStorage.removeItem("ecommerce-token");
+     navigate('/login')
+
+
+   }
  
   return (
      <div className="bg-white sticky top-0 z-50  "  >
@@ -62,18 +71,24 @@ const Navbar = () => {
                       Order
                     </Link>
                   </div>
-
-                  <div className="flow-root">
+                  {
+                    userInfo?.user?.email === "ajay@gmail.com" ? <div className="flow-root">
                     <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
-                      admin
+                      admin 
                     </Link>
-                  </div>
-
-                  <div className="flow-root">
-                    <a className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
-                      Logout
-                    </a>
-                  </div>
+                  </div> : ""
+                  }
+                  {
+                    userInfo ? 
+                        <div className="flow-root">
+                          <a onClick={handleLogout} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                            Logout 
+                          </a>
+                        </div>
+                        : ""
+                    
+                  }
+                
                   <div className="flow-root">
                     <Link to={'/'} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer">
                       <img
@@ -138,13 +153,20 @@ const Navbar = () => {
                   <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Order
                   </Link>
-                  <Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                    Admin
-                  </Link>
+                   {
+                    userInfo?.user?.email === "ajay@gmail.com" ? <div className="flow-root">
+                    <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                      Admin
+                    </Link>
+                  </div> : ""
+                  }
 
-                  <a className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                 {
+                  userInfo ?  <a onClick={handleLogout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Logout
                   </a>
+                  : ""
+                 }
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
